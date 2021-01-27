@@ -1,0 +1,23 @@
+#!/usr/bin/with-contenv bash
+
+# make our folders and links
+mkdir -p \
+	/config/crontabs \
+        /config/logs \
+        /config/scripts \
+        /config/scripts/before \
+        /config/scripts/after \
+        /data
+
+# copy crontab defaults if needed
+[[ ! -f /config/crontabs/root ]] && \
+	cp /etc/crontabs/root /config/crontabs/
+[[ ! -f /config/restic_backup.sh ]] && \
+        cp /etc/restic_backup.sh /config/restic_backup.sh
+
+# initialize restic repository if needed
+restic -r $RESTIC_REPOSITORY snapshots || restic -r $RESTIC_REPOSITORY init
+
+# permissions
+chown -R abc:abc \
+	/config

@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+
+restic -r $RESTIC_REPOSITORY snapshots

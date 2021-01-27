@@ -1,0 +1,13 @@
+# do daily/weekly/monthly maintenance
+# min   hour    day     month   weekday command
+*/15    *       *       *       *       run-parts /etc/periodic/15min
+0       *       *       *       *       run-parts /etc/periodic/hourly
+0       2       *       *       *       run-parts /etc/periodic/daily
+0       3       *       *       6       run-parts /etc/periodic/weekly
+0       5       1       *       *       run-parts /etc/periodic/monthly
+
+# restic examples
+# backup every day @ 00:00
+0       0       *       *       *       sh /config/restic_backup.sh 1> /config/logs/backup.log 2>&1
+# check repo every 10 days @4am
+0       4       */10    *       *       sh /config/restic_check.sh 1> /config/logs/check.log 2>&1

@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  restic:
+    image: restic
+    container_name: restic
+    env_file:
+      - .env
+    hostname: unraid
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+    devices:
+      - /dev/fuse
+    volumes:
+      - ./data:/data:ro
+      - ./config:/config
