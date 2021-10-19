@@ -23,10 +23,11 @@ do_print "Running restic backup of $RESTIC_REPOSITORY"
 [[ -z "$RESTIC_HOSTNAME" ]] && $RESTIC_HOSTNAME=$(hostname)
 
 restic \
-    -r $RESTIC_REPOSITORY \
-    -H $RESTIC_HOSTNAME \
+    --repo $RESTIC_REPOSITORY \
     $RESTIC_OPTIONAL_ARGS \
     backup \
+    --host $RESTIC_HOSTNAME \
+    $RESTIC_OPTIONAL_BACKUP_ARGS \
     /data
 
 do_print "Running post-backup scripts"
