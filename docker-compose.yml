@@ -11,6 +11,12 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - RESTIC_REPOSITORY=b2:some-bucket:/
+      - RESTIC_HOSTNAME=myserver  # otherwise defaults to a docker hostname
+      - RESTIC_OPTIONAL_ARGS=
+      - RESTIC_PASSWORD=your-super-secure-password
+      - B2_ACCOUNT_ID=
+      - B2_ACCOUNT_KEY=
     devices:
       - /dev/fuse
     volumes:
