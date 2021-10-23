@@ -9,5 +9,3 @@
 # restic examples
 # backup every day @ 00:00
 0       0       *       *       *       sh /config/restic_backup.sh 1> /config/logs/backup-$(date +"%Y-%m-%d_%T").log 2>&1
-# check repo every 10 days @4am
-0       4       */10    *       *       sh /config/restic_check.sh 1> /config/logs/check-$(date +"%Y-%m-%d_%T").log 2>&1
