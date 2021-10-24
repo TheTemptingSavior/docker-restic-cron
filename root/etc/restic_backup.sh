@@ -27,9 +27,9 @@ done
 [[ -z "$RESTIC_HOSTNAME" ]] && exit 1
 
 
-do_print "Running restic backup of $RESTIC_REPOSITORY"
+do_print "Running restic backup of $RESTIC_REPOSITORY:$RESTIC_HOSTNAME"
 restic \
-    --repo $RESTIC_REPOSITORY \
+    --repo $RESTIC_REPOSITORY:$RESTIC_HOSTNAME \
     $RESTIC_OPTIONAL_ARGS \
     backup \
     --host $RESTIC_HOSTNAME \
@@ -37,9 +37,9 @@ restic \
     /data
 
 
-do_print "Running restic forget of $RESTIC_REPOSITORY"
+do_print "Running restic forget of $RESTIC_REPOSITORY:$RESTIC_HOSTNAME"
 restic \
-    --repo $RESTIC_REPOSITORY/$RESTIC_HOSTNAME \
+    --repo $RESTIC_REPOSITORY:$RESTIC_HOSTNAME \
     $RESTIC_OPTIONAL_ARGS \
     forget \
     --host=$RESTIC_HOSTNAME \
@@ -58,4 +58,4 @@ for f in /config/scripts/after/*; do
 done
 
 
-do_print "Completed restic backup of $RESTIC_REPOSITORY"
+do_print "Completed restic backup of $RESTIC_REPOSITORY:$RESTIC_HOSTNAME"

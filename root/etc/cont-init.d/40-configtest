@@ -1,3 +1,3 @@
 #!/usr/bin/with-contenv bash
 
-restic -r $RESTIC_REPOSITORY snapshots
+restic -r $RESTIC_REPOSITORY:$RESTIC_HOSTNAME snapshots

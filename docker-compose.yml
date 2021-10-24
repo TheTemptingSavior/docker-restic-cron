@@ -6,12 +6,11 @@ services:
     container_name: restic
     env_file:
       - .env
-    hostname: unraid
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
-      - RESTIC_REPOSITORY="b2:some-bucket:"
+      - RESTIC_REPOSITORY=b2:some-bucket
       - RESTIC_HOSTNAME=myserver  # otherwise defaults to a docker hostname
       - RESTIC_OPTIONAL_ARGS=
       - RESTIC_OPTIONAL_BACKUP_ARGS=
