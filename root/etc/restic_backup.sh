@@ -30,16 +30,24 @@ done
 do_print "Running restic backup of $RESTIC_REPOSITORY:$RESTIC_HOSTNAME"
 restic \
     --repo $RESTIC_REPOSITORY:$RESTIC_HOSTNAME \
+    --cache-dir /config/cache \
     $RESTIC_OPTIONAL_ARGS \
     backup \
     --host $RESTIC_HOSTNAME \
     $RESTIC_OPTIONAL_BACKUP_ARGS \
     /data
 
+# Ensure we unlock the repo for the next command
+restic \
+    --repo $RESTIC_REPOSITORY:$RESTIC_HOSTNAME \
+    --cache-dir /config/cache \
+    $RESTIC_OPTIONAL_ARGS \
+    unlock
 
 do_print "Running restic forget of $RESTIC_REPOSITORY:$RESTIC_HOSTNAME"
 restic \
     --repo $RESTIC_REPOSITORY:$RESTIC_HOSTNAME \
+    --cache-dir /config/cache \
     $RESTIC_OPTIONAL_ARGS \
     forget \
     --host=$RESTIC_HOSTNAME \
@@ -48,6 +56,12 @@ restic \
     --keep-monthly 6 \
     --keep-yearly 2 \
 
+# Ensure we unlock the repo before we exit
+restic \
+    --repo $RESTIC_REPOSITORY:$RESTIC_HOSTNAME \
+    --cache-dir /config/cache \
+    $RESTIC_OPTIONAL_ARGS \
+    unlock
 
 do_print "Running post-backup scripts"
 # Run post-backup scripts
