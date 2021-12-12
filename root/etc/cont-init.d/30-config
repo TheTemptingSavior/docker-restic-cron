@@ -16,7 +16,7 @@ mkdir -p \
         cp /etc/restic_backup.sh /config/restic_backup.sh
 
 # initialize restic repository if needed
-restic -r $RESTIC_REPOSITORY:$RESTIC_HOSTNAME snapshots || restic -r $RESTIC_REPOSITORY:$RESTIC_HOSTNAME init
+restic -r $RESTIC_REPOSITORY:$RESTIC_HOSTNAME --cache-dir /config/cache snapshots || restic -r $RESTIC_REPOSITORY:$RESTIC_HOSTNAME --cache-dir /config/cache init
 
 # permissions
 chown -R abc:abc \
