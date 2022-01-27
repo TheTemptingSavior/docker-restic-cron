@@ -1,19 +1,11 @@
 ---
 kind: pipeline
-type: docker
+type: kubernetes
 name: default
 
 steps:
-  - name: docker_push
-    image: plugins/docker
-    when:
-      branch: master
-      event: push
-    settings:
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-      repo: registry.ethancotterell.co.uk/ethan/docker-restic-cron
-      registry: registry.ethancotterell.co.uk
-      tags: latest
+  - name: hello-world
+    image: alpine:3.16.2
+    commands:
+      - echo "Hello World"
+      - ls
