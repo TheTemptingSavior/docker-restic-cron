@@ -8,7 +8,7 @@ steps:
     image: plugins/docker
     settings:
       registry: registry.digitalocean.com
-      repo: theredkingdom/docker-restic-cron
+      repo: registry.digitalocean.com/theredkingdom/restic-cron
       tags: latest
       username:
         from_secret: docker_do_username
