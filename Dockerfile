@@ -1,4 +1,4 @@
-FROM golang:1.15-alpine as builder
+FROM golang:1.18-alpine as builder
 
 RUN apk add git && \
     git clone https://github.com/restic/restic /go/src/github.com/restic/restic
@@ -11,7 +11,7 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.12
 # packages as variables
 ARG BUILD_PACKAGES=""
 ARG RUNTIME_PACKAGES="\
-    fuse"
+    fuse curl"
 
 COPY --from=builder /usr/bin/restic /bin/restic
 

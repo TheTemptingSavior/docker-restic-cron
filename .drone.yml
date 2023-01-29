@@ -4,8 +4,13 @@ type: docker
 name: default
 
 steps:
-  - name: hello-world
-    image: alpine:3.16.2
-    commands:
-      - echo "Hello World"
-      - ls
+  - name: "Build Docker image"
+    image: plugins/docker
+    settings:
+      registry: registry.digitalocean.com
+      repo: theredkingdom/docker-restic-cron
+      tags: latest
+      username:
+        from_secret: docker_do_username
+      password:
+        from_secret: docker_do_password
