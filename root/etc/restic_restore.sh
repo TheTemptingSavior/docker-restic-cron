@@ -10,10 +10,10 @@ function do_print() {
     echo "[$NOW] $1"
 }
 
-do_print "This will restore all the data from the last snapshot into the `/data/` directory"
+do_print "This will restore all the data from the last snapshot into the \`/data/\` directory"
 do_print "This operation is irreversible. Type 'yes' to continue"
 
-read $USER_INPUT
+read -r USER_INPUT
 if [ "$USER_INPUT" = "yes" ]; then
     do_print "Continuing with the restic restore"
 else
@@ -24,10 +24,10 @@ fi
 
 do_print "Beginning restore now"
 restic \
-    --repo $RESTIC_REPOSITORY:$RESTIC_HOSTNAME \
-    $RESTIC_OPTIONAL_ARGS \
+    --repo "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+    "$RESTIC_OPTIONAL_ARGS" \
     restore \
-    --host $RESTIC_HOSTNAME \
+    --host "$RESTIC_HOSTNAME" \
     --target /data \
     --verfiy \
     latest
