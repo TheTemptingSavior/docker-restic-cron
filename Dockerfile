@@ -1,4 +1,4 @@
-FROM golang:1.18-alpine as builder
+FROM golang:1.20-alpine as builder
 
 RUN apk add git && \
     git clone https://github.com/restic/restic /go/src/github.com/restic/restic
@@ -6,7 +6,7 @@ WORKDIR /go/src/github.com/restic/restic
 RUN go run build.go -v -o /usr/bin/restic
 
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:3.18
 
 # packages as variables
 ARG BUILD_PACKAGES=""
