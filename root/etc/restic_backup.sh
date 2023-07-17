@@ -20,7 +20,7 @@ do_print "Running pre-backup scripts"
 # Run pre-backup scripts
 for f in /config/scripts/before/*; do
     if [ -f "$f" -a -x "$f" ]; then
-        bash "$f"
+        bash "$f" || echo "Failed running \"$f\"";
     fi
 done
 
@@ -68,7 +68,7 @@ do_print "Running post-backup scripts"
 # Run post-backup scripts
 for f in /config/scripts/after/*; do
     if [ -f "$f" -a -x "$f" ]; then
-        bash "$f"
+        bash "$f" || echo "Failed running \"$f\"";
     fi
 done
 
