@@ -44,6 +44,7 @@ restic \
     --repo "$RESTIC_REPOSITORY" \
     "$RESTIC_OPTIONAL_ARGS" \
     forget \
+    --prune \
     --host="$RESTIC_HOSTNAME" \
     --keep-daily $RESTIC_KEEP_DAILY \
     --keep-weekly $RESTIC_KEEP_WEEKLY \
