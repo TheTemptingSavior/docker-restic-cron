@@ -26,15 +26,9 @@ fi
     cp /etc/restic_backup.sh /config/restic_backup.sh
 
 # initialize restic repository if needed
-restic -r "$RESTIC_REPOSITORY" \
-       --cache-dir /config/cache \
-       --compression=max \
-      snapshots \
-      --host="$RESTIC_HOSTNAME" \
+restic -r "$RESTIC_REPOSITORY" snapshots --host="$RESTIC_HOSTNAME" \
       || \
-      restic -r "$RESTIC_REPOSITORY" --compression=max \
-      --cache-dir /config/cache \
-      init
+      restic -r "$RESTIC_REPOSITORY" init
 
 # permissions
 chown -R abc:abc /config

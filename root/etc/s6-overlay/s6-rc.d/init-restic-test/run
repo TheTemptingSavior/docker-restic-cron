@@ -2,4 +2,4 @@
 # shellcheck shell=bash
 set -e 
 
-restic -r "$RESTIC_REPOSITORY" --cache-dir /config/cache snapshots --host="$RESTIC_HOSTNAME"
+restic -r "$RESTIC_REPOSITORY" snapshots --host="$RESTIC_HOSTNAME"
