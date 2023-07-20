@@ -24,7 +24,7 @@ fi
 
 do_print "Beginning restore now"
 restic \
-    --repo "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+    --repo "$RESTIC_REPOSITORY" \
     "$RESTIC_OPTIONAL_ARGS" \
     restore \
     --host "$RESTIC_HOSTNAME" \

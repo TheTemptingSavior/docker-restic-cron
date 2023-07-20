@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bash
+# shellcheck shell=bash
 
-# make our folders and links
+# folders
 mkdir -p /config/crontabs \
          /config/logs \
          /config/scripts \
@@ -8,18 +9,30 @@ mkdir -p /config/crontabs \
          /config/scripts/after \
          /data
 
+if [ -d /ssh ]; then
+    cp -ar /ssh /root/.ssh
+    chown -R root:root /root/.ssh
+
+    chmod 700 /root/.ssh
+    chmod 600 /root/.ssh/*
+fi
+
 # copy crontab defaults if needed
 [[ ! -f /config/crontabs/root ]] && \
 	cp /etc/crontabs/root /config/crontabs/
+[[ ! -f /config/crontabs/abc ]] && \
+	cp /etc/crontabs/abc /config/crontabs/
 [[ ! -f /config/restic_backup.sh ]] && \
-        cp /etc/restic_backup.sh /config/restic_backup.sh
+    cp /etc/restic_backup.sh /config/restic_backup.sh
 
 # initialize restic repository if needed
-restic -r "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+restic -r "$RESTIC_REPOSITORY" \
        --cache-dir /config/cache \
+       --compression=max \
       snapshots \
+      --host="$RESTIC_HOSTNAME" \
       || \
-      restic -r "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+      restic -r "$RESTIC_REPOSITORY" --compression=max \
       --cache-dir /config/cache \
       init
 

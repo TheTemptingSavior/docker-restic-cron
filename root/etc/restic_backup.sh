@@ -26,9 +26,9 @@ done
 
 do_print "Running restic backup of $RESTIC_REPOSITORY:$RESTIC_HOSTNAME"
 restic \
-    --repo "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+    --repo "$RESTIC_REPOSITORY" \
     --cache-dir /config/cache \
-    --comporession max \
+    --compression max \
     "$RESTIC_OPTIONAL_ARGS" \
     backup \
     --host "$RESTIC_HOSTNAME" \
@@ -37,30 +37,30 @@ restic \
 
 # Ensure we unlock the repo for the next command
 restic \
-    --repo "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+    --repo "$RESTIC_REPOSITORY" \
     --cache-dir /config/cache \
-    --comporession max \
+    --compression max \
     "$RESTIC_OPTIONAL_ARGS" \
     unlock
 
 do_print "Running restic forget of $RESTIC_REPOSITORY:$RESTIC_HOSTNAME"
 restic \
-    --repo "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+    --repo "$RESTIC_REPOSITORY" \
     --cache-dir /config/cache \
-    --comporession max \
+    --compression max \
     "$RESTIC_OPTIONAL_ARGS" \
     forget \
     --host="$RESTIC_HOSTNAME" \
-    --keep-daily 7 \
-    --keep-weekly 4 \
-    --keep-monthly 6 \
-    --keep-yearly 2 \
+    --keep-daily $RESTIC_KEEP_DAILY \
+    --keep-weekly $RESTIC_KEEP_WEEKLY \
+    --keep-monthly $RESTIC_KEEP_MONTHLY \
+    --keep-yearly $RESTIC_KEEP_YEARLY \
 
 # Ensure we unlock the repo before we exit
 restic \
-    --repo "$RESTIC_REPOSITORY:$RESTIC_HOSTNAME" \
+    --repo "$RESTIC_REPOSITORY" \
     --cache-dir /config/cache \
-    --comporession max \
+    --compression max \
     "$RESTIC_OPTIONAL_ARGS" \
     unlock
 

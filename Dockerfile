@@ -11,7 +11,7 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.18
 # packages as variables
 ARG BUILD_PACKAGES=""
 ARG RUNTIME_PACKAGES="\
-    fuse curl"
+    fuse curl openssh"
 
 COPY --from=builder /usr/bin/restic /bin/restic
 
@@ -41,9 +41,11 @@ COPY root /
 
 # docker mods
 ENV DOCKER_MODS linuxserver/mods:universal-cron
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 1
 
-# restic env variables
-ENV RESTIC_REPOSITORY /data
-ENV RESTIC_OPTIONAL_ARGS --verbose
+ENV RESTIC_KEEP_DAILY 7
+ENV RESTIC_KEEP_WEEKLY 4
+ENV RESTIC_KEEP_MONTHLY 6
+ENV RESTIC_KEEP_YEARLY 2
 
-VOLUME /config
+VOLUME /config /ssh

@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+set -e 
+
+restic -r "$RESTIC_REPOSITORY" --cache-dir /config/cache snapshots --host="$RESTIC_HOSTNAME"
