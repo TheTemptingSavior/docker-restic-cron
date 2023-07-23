@@ -3,8 +3,8 @@
 
 set -e
 
-if [[ -z ${RUN_ON_START} ]]; then
-    echo "[init-first-time] Env var not set. Ignoring."
+if [[ -z ${RUN_ON_START} || "$RUN_ON_START" != "1" ]]; then
+    echo "[init-first-time] Run on start is not '1'. Skipping."
 else
     echo "[init-first-time] Backing up now"
     sh /config/restic_backup.sh
