@@ -29,7 +29,7 @@ restic \
     restore \
     --host "$RESTIC_HOSTNAME" \
     --target /data \
-    --verfiy \
+    --verify \
     latest
 
 

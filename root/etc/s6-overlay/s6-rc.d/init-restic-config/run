@@ -1,6 +1,8 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
+echo "[init-restic-config] Running setup"
+
 # folders
 mkdir -p /config/crontabs \
          /config/logs \
@@ -26,7 +28,7 @@ fi
     cp /etc/restic_backup.sh /config/restic_backup.sh
 
 # initialize restic repository if needed
-restic -r "$RESTIC_REPOSITORY" snapshots --host="$RESTIC_HOSTNAME" \
+restic -r "$RESTIC_REPOSITORY" snapshots --host="$RESTIC_HOSTNAME" 1>/dev/null \
       || \
       restic -r "$RESTIC_REPOSITORY" init
 
